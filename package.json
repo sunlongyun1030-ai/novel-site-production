@@ -1,27 +1,10 @@
 {
   "name": "novel-site-d1",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "rm -f tsconfig.json; TYPESCRIPT_CREATE_CONFIG=false npx next build; test -f tsconfig.json && rm -f tsconfig.json || true",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "echo 'Building static site...' && cp index.html public/ 2>/dev/null || true",
+    "dev": "echo 'Static site - no dev server needed'"
   },
-  "dependencies": {
-    "next": "14.2.5",
-    "react": "^18",
-    "react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "tailwindcss": "^3.3.0",
-    "wrangler": "^4.0.0"
-  },
-  "devDependencies": {
-    "@next/font": "^14.2.15",
-    "@types/node": "^20.19.39",
-    "@types/react": "^18.3.28",
-    "@types/react-dom": "^18.3.7",
-    "postcss": "^8",
-    "typescript": "^5"
-  }
+  "devDependencies": {}
 }
