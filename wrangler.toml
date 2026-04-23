@@ -1,7 +1,7 @@
 name = "novel-site-d1"
 
 # Cloudflare Pages配置
-pages_build_output_dir = ".next/standalone"
+pages_build_output_dir = ".next"
 
 # 兼容性配置
 compatibility_date = "2026-04-23"
