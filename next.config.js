@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 绝对最小配置
+  // 基本配置
   reactStrictMode: false,
   
   // 禁用所有检查
@@ -16,11 +16,17 @@ const nextConfig = {
     unoptimized: true,
   },
   
-  // 禁用所有实验性功能
-  experimental: {},
-  
-  // 禁用字体优化（可能引起问题）
-  optimizeFonts: false,
+  // Webpack配置 - 添加路径别名
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // 客户端构建时添加别名
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@': __dirname,
+      }
+    }
+    return config
+  },
 }
 
 module.exports = nextConfig

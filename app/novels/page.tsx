@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, Suspense } from 'react'
 import Link from 'next/link'
-import { useAuth } from '@/hooks/use-auth'
+import { useAuth } from '@/app/use-auth'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 interface Novel {
