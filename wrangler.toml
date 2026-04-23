@@ -12,10 +12,6 @@ compatibility_flags = ["nodejs_compat"]
 NODE_ENV = "production"
 NODE_VERSION = "20"
 
-# 部署配置
-[deployment]
-environment = "production"
-
 [[d1_databases]]
 binding = "DB"
 database_name = "novel-site-db"
