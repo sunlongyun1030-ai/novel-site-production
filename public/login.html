@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>注册账号 - 简阅小说创作平台</title>
+    <title>登录账号 - 简阅小说创作平台</title>
     <style>
         :root {
             --primary: #2563eb;
@@ -112,13 +112,6 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
         
-        .form-help {
-            display: block;
-            margin-top: 0.5rem;
-            color: var(--gray);
-            font-size: 0.875rem;
-        }
-        
         .btn {
             display: block;
             width: 100%;
@@ -163,47 +156,6 @@
             text-decoration: underline;
         }
         
-        .requirements {
-            background: #f0f9ff;
-            border: 1px solid #bae6fd;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .requirements-title {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .requirements-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .requirements-item {
-            padding: 0.25rem 0;
-            color: var(--gray);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .requirements-item::before {
-            content: "✓";
-            color: var(--success);
-            font-weight: bold;
-        }
-        
-        .footer {
-            background: var(--dark);
-            color: white;
-            padding: 2rem 1rem;
-            text-align: center;
-            margin-top: 3rem;
-        }
-        
         .message {
             padding: 1rem;
             border-radius: 0.5rem;
@@ -221,6 +173,14 @@
             background: #fee2e2;
             color: #991b1b;
             border: 1px solid #fecaca;
+        }
+        
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            margin-top: 3rem;
         }
         
         @media (max-width: 640px) {
@@ -247,7 +207,7 @@
                 <span>简阅小说</span>
             </a>
             <div>
-                <a href="/login" class="form-link">已有账号？立即登录</a>
+                <a href="/register.html" class="form-link">没有账号？立即注册</a>
             </div>
         </nav>
     </header>
@@ -256,47 +216,30 @@
     <main class="container">
         <div class="card">
             <div class="card-header">
-                <h1 class="card-title">注册账号</h1>
-                <p class="card-subtitle">加入简阅小说创作平台，开始你的创作之旅</p>
+                <h1 class="card-title">登录账号</h1>
+                <p class="card-subtitle">欢迎回到简阅小说创作平台</p>
             </div>
             
             <!-- 消息区域 -->
             <div id="message" class="message"></div>
             
-            <form id="registerForm">
+            <form id="loginForm">
                 <div class="form-group">
                     <label for="username" class="form-label">用户名</label>
-                    <input type="text" id="username" class="form-input" placeholder="请输入用户名（支持中文）" required>
-                    <span class="form-help">用户名将显示在你的作品和评论中</span>
+                    <input type="text" id="username" class="form-input" placeholder="请输入用户名" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="password" class="form-label">密码</label>
                     <input type="password" id="password" class="form-input" placeholder="请输入密码" required>
-                    <span class="form-help">密码至少6位字符</span>
                 </div>
                 
-                <div class="form-group">
-                    <label for="confirmPassword" class="form-label">确认密码</label>
-                    <input type="password" id="confirmPassword" class="form-input" placeholder="请再次输入密码" required>
-                </div>
-                
-                <div class="requirements">
-                    <div class="requirements-title">账号要求：</div>
-                    <ul class="requirements-list">
-                        <li class="requirements-item">专为5-6年级小学生设计</li>
-                        <li class="requirements-item">无需邮箱，保护隐私</li>
-                        <li class="requirements-item">完全免费使用</li>
-                        <li class="requirements-item">简约界面，操作简单</li>
-                    </ul>
-                </div>
-                
-                <button type="submit" class="btn">注册账号</button>
+                <button type="submit" class="btn">登录账号</button>
             </form>
             
             <div class="form-footer">
-                <p>已有账号？ <a href="/login" class="form-link">立即登录</a></p>
-                <p>注册即表示同意 <a href="/terms" class="form-link">使用条款</a> 和 <a href="/privacy" class="form-link">隐私政策</a></p>
+                <p>没有账号？ <a href="/register.html" class="form-link">立即注册</a></p>
+                <p>忘记密码？ <a href="/reset-password.html" class="form-link">重置密码</a></p>
             </div>
         </div>
     </main>
@@ -310,7 +253,7 @@
     <script src="/database.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('registerForm');
+            const form = document.getElementById('loginForm');
             const message = document.getElementById('message');
             
             // 检查是否已登录
@@ -336,16 +279,10 @@
                 // 获取表单数据
                 const username = document.getElementById('username').value.trim();
                 const password = document.getElementById('password').value;
-                const confirmPassword = document.getElementById('confirmPassword').value;
                 
                 // 验证数据
                 if (!username) {
                     showMessage('请输入用户名', 'error');
-                    return;
-                }
-                
-                if (username.length < 2) {
-                    showMessage('用户名至少2个字符', 'error');
                     return;
                 }
                 
@@ -354,18 +291,8 @@
                     return;
                 }
                 
-                if (password.length < 6) {
-                    showMessage('密码至少6位字符', 'error');
-                    return;
-                }
-                
-                if (password !== confirmPassword) {
-                    showMessage('两次输入的密码不一致', 'error');
-                    return;
-                }
-                
-                // 使用数据库创建用户
-                const result = window.novelSiteDB.users.createUser(username, password);
+                // 使用数据库验证用户
+                const result = window.novelSiteDB.users.authenticate(username, password);
                 
                 if (result.success) {
                     // 保存当前用户登录状态
@@ -376,10 +303,7 @@
                         isAdmin: result.user.isAdmin
                     }));
                     
-                    // 更新页面统计数据
-                    window.novelSiteDB.updateStats();
-                    
-                    showMessage('🎉 注册成功！正在跳转到首页...', 'success');
+                    showMessage('🎉 登录成功！正在跳转到首页...', 'success');
                     
                     // 3秒后跳转到首页
                     setTimeout(function() {
@@ -403,7 +327,7 @@
             }
             
             // 控制台信息
-            console.log('📝 注册页面已加载');
+            console.log('🔐 登录页面已加载');
             console.log('📊 数据库系统已连接');
         });
     </script>

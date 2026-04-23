@@ -316,7 +316,7 @@
             <div class="nav-links">
                 <a href="#features" class="nav-link">特色功能</a>
                 <a href="#stats" class="nav-link">平台数据</a>
-                <a href="/login" class="nav-link">登录</a>
+                <a href="/login.html" class="nav-link">登录</a>
                 <a href="/register.html" class="btn">免费注册</a>
             </div>
         </nav>
@@ -429,6 +429,9 @@
         </div>
     </footer>
 
+    <!-- 数据库脚本 -->
+    <script src="/database.js"></script>
+    
     <script>
         // 简单的交互效果
         document.addEventListener('DOMContentLoaded', function() {
@@ -456,11 +459,49 @@
                 yearElement.innerHTML = yearElement.innerHTML.replace('2026', currentYear);
             }
             
+            // 更新用户状态
+            updateUserStatus();
+            
             // 控制台欢迎信息
             console.log('🎉 简阅小说创作平台已成功部署！');
             console.log('📚 专为5-6年级小学生设计的简约小说创作空间');
             console.log('🚀 基于Cloudflare Pages全球加速');
+            console.log('📊 数据库系统已连接');
+            console.log(`👤 当前用户数: ${window.novelSiteDB.users.getUserCount()}`);
+            console.log(`📚 当前小说数: ${window.novelSiteDB.novels.getNovelCount()}`);
         });
+        
+        // 更新用户状态
+        function updateUserStatus() {
+            const currentUser = localStorage.getItem('currentUser');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (navLinks) {
+                if (currentUser) {
+                    try {
+                        const userData = JSON.parse(currentUser);
+                        if (userData.isLoggedIn) {
+                            // 替换登录/注册链接为用户信息
+                            const userHtml = `
+                                <span style="color: #2563eb; font-weight: 500;">${userData.username}</span>
+                                <a href="/logout.html" class="nav-link" style="margin-left: 1rem;">退出</a>
+                            `;
+                            
+                            // 找到登录和注册链接并替换
+                            const loginLink = document.querySelector('a[href="/login.html"]');
+                            const registerLink = document.querySelector('a[href="/register.html"]');
+                            
+                            if (loginLink && registerLink) {
+                                loginLink.parentNode.innerHTML = userHtml;
+                                registerLink.style.display = 'none';
+                            }
+                        }
+                    } catch (e) {
+                        console.error('解析用户数据失败:', e);
+                    }
+                }
+            }
+        }
     </script>
 </body>
 </html>
