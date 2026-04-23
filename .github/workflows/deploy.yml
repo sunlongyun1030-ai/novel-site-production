@@ -10,11 +10,10 @@ env:
   ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: write
     
     steps:
       - name: Checkout
@@ -34,11 +33,9 @@ jobs:
         env:
           NODE_ENV: production
       
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy .next/standalone --project-name=novel-site-d1
-        env:
-          NODE_VERSION: "20"
+          name: nextjs-build
+          path: .next
+          retention-days: 1
