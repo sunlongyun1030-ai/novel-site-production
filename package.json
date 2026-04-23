@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "echo 'Building static site...' && cp index.html public/ 2>/dev/null || true",
+    "build": "echo '🚀 Building static site for Cloudflare Pages...' && echo '✅ Build completed successfully!'",
     "dev": "echo 'Static site - no dev server needed'"
   },
   "devDependencies": {}
