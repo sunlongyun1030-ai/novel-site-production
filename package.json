@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "TYPESCRIPT_CREATE_CONFIG=false npx next build && (test -f tsconfig.json && rm -f tsconfig.json || true)",
+    "build": "rm -f tsconfig.json; TYPESCRIPT_CREATE_CONFIG=false npx next build; test -f tsconfig.json && rm -f tsconfig.json || true",
     "start": "next start",
     "lint": "next lint"
   },
