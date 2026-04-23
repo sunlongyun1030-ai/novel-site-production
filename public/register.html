@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册账号 - 简阅小说创作平台</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --success: #10b981;
+            --error: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 2rem;
+        }
+        
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+            flex: 1;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .card-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .card-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-subtitle {
+            color: var(--gray);
+            font-size: 1.125rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .form-help {
+            display: block;
+            margin-top: 0.5rem;
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            color: var(--gray);
+        }
+        
+        .form-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .form-link:hover {
+            text-decoration: underline;
+        }
+        
+        .requirements {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .requirements-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .requirements-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .requirements-item {
+            padding: 0.25rem 0;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .requirements-item::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .message {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        
+        .message-success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .message-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        
+        @media (max-width: 640px) {
+            .container {
+                margin: 1rem auto;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .card-title {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <span>📚</span>
+                <span>简阅小说</span>
+            </a>
+            <div>
+                <a href="/login" class="form-link">已有账号？立即登录</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 主内容 -->
+    <main class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">注册账号</h1>
+                <p class="card-subtitle">加入简阅小说创作平台，开始你的创作之旅</p>
+            </div>
+            
+            <!-- 消息区域 -->
+            <div id="message" class="message"></div>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="username" class="form-label">用户名</label>
+                    <input type="text" id="username" class="form-input" placeholder="请输入用户名（支持中文）" required>
+                    <span class="form-help">用户名将显示在你的作品和评论中</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">密码</label>
+                    <input type="password" id="password" class="form-input" placeholder="请输入密码" required>
+                    <span class="form-help">密码至少6位字符</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword" class="form-label">确认密码</label>
+                    <input type="password" id="confirmPassword" class="form-input" placeholder="请再次输入密码" required>
+                </div>
+                
+                <div class="requirements">
+                    <div class="requirements-title">账号要求：</div>
+                    <ul class="requirements-list">
+                        <li class="requirements-item">专为5-6年级小学生设计</li>
+                        <li class="requirements-item">无需邮箱，保护隐私</li>
+                        <li class="requirements-item">完全免费使用</li>
+                        <li class="requirements-item">简约界面，操作简单</li>
+                    </ul>
+                </div>
+                
+                <button type="submit" class="btn">注册账号</button>
+            </form>
+            
+            <div class="form-footer">
+                <p>已有账号？ <a href="/login" class="form-link">立即登录</a></p>
+                <p>注册即表示同意 <a href="/terms" class="form-link">使用条款</a> 和 <a href="/privacy" class="form-link">隐私政策</a></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>© 2026 简阅小说创作平台. 基于Cloudflare Pages部署. 版本 1.0.0</p>
+        <p style="margin-top: 0.5rem; color: #94a3b8; font-size: 0.9rem;">专为5-6年级小学生设计的简约小说创作空间</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registerForm');
+            const message = document.getElementById('message');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // 获取表单数据
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                // 验证数据
+                if (!username) {
+                    showMessage('请输入用户名', 'error');
+                    return;
+                }
+                
+                if (username.length < 2) {
+                    showMessage('用户名至少2个字符', 'error');
+                    return;
+                }
+                
+                if (!password) {
+                    showMessage('请输入密码', 'error');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    showMessage('密码至少6位字符', 'error');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    showMessage('两次输入的密码不一致', 'error');
+                    return;
+                }
+                
+                // 模拟注册成功
+                showMessage('🎉 注册成功！正在跳转到首页...', 'success');
+                
+                // 保存用户信息到localStorage（模拟）
+                localStorage.setItem('user', JSON.stringify({
+                    username: username,
+                    isLoggedIn: true
+                }));
+                
+                // 3秒后跳转到首页
+                setTimeout(function() {
+                    window.location.href = '/';
+                }, 3000);
+            });
+            
+            function showMessage(text, type) {
+                message.textContent = text;
+                message.className = 'message';
+                message.classList.add('message-' + type);
+                message.style.display = 'block';
+                
+                // 5秒后自动隐藏
+                setTimeout(function() {
+                    message.style.display = 'none';
+                }, 5000);
+            }
+            
+            // 检查是否已登录
+            const user = localStorage.getItem('user');
+            if (user) {
+                try {
+                    const userData = JSON.parse(user);
+                    if (userData.isLoggedIn) {
+                        showMessage('您已登录，正在跳转到首页...', 'success');
+                        setTimeout(function() {
+                            window.location.href = '/';
+                        }, 2000);
+                    }
+                } catch (e) {
+                    // 忽略解析错误
+                }
+            }
+            
+            // 控制台信息
+            console.log('📝 注册页面已加载');
+            console.log('👤 用户名验证：支持中文，至少2个字符');
+            console.log('🔒 密码验证：至少6位字符');
+            console.log('💾 使用localStorage模拟用户登录状态');
+        });
+    </script>
+</body>
+</html>
