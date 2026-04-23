@@ -12,6 +12,11 @@ compatibility_flags = ["nodejs_compat"]
 NODE_ENV = "production"
 NODE_VERSION = "20"
 CI = "true"
+VERCEL_PROXY_URL = "https://novel-site-omega.vercel.app"
+
+# 启用Functions
+[functions]
+directory = "functions"
 
 [[d1_databases]]
 binding = "DB"
