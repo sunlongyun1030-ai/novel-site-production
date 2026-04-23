@@ -5,11 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:cloudflare": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "deploy": "wrangler pages deploy .next --project-name=novel-site-d1",
-    "deploy:preview": "wrangler pages deploy .next --project-name=novel-site-d1 --branch=preview"
+    "lint": "next lint"
   },
   "dependencies": {
     "next": "14.2.5",

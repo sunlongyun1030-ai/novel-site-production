@@ -1,22 +1,30 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 绝对最小配置 - Cloudflare Pages专用
-  reactStrictMode: false,
+  // 基本配置
+  reactStrictMode: true,
+  swcMinify: true,
   
-  // 禁用所有检查
+  // 禁用TypeScript检查（Cloudflare环境可能有问题）
   typescript: {
     ignoreBuildErrors: true,
   },
+  
+  // 禁用ESLint检查
   eslint: {
     ignoreDuringBuilds: true,
   },
   
-  // 静态导出（最兼容）
-  output: 'export',
+  // 重要：移除output: 'export'，使用默认构建
+  // output: 'export',
   
-  // 禁用图片优化
+  // 图片优化配置
   images: {
     unoptimized: true,
+  },
+  
+  // 实验性功能（如果需要）
+  experimental: {
+    serverComponentsExternalPackages: ['wrangler'],
   },
 }
 
