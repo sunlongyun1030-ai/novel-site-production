@@ -10,7 +10,7 @@ output_directory = ".next"
 format = "directory"
 
 [env]
-NODE_VERSION = "18"
+NODE_VERSION = "20"
 
 [[env.production]]
 NODE_ENV = "production"
