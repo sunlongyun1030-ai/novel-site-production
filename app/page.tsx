@@ -1,62 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 export default function HomePage() {
-  const [stats, setStats] = useState({
-    totalNovels: 0,
-    totalChapters: 0,
-    totalComments: 0,
-    totalUsers: 0
-  })
-  const [loading, setLoading] = useState(true)
-  const [recentNovels, setRecentNovels] = useState<Array<{
-    id: string
-    title: string
-    description: string | null
-    author_username: string
-  }>>([])
-
-  useEffect(() => {
-    loadData()
-  }, [])
-
-  const loadData = async () => {
-    try {
-      // 加载统计数据
-      const statsRes = await fetch('/api/stats')
-      if (statsRes.ok) {
-        const statsData = await statsRes.json()
-        setStats({
-          totalNovels: statsData.stats.published_novels,
-          totalChapters: statsData.stats.chapters,
-          totalComments: statsData.stats.comments,
-          totalUsers: statsData.stats.users
-        })
-      }
-
-      // 加载最新小说
-      const novelsRes = await fetch('/api/novels')
-      if (novelsRes.ok) {
-        const novelsData = await novelsRes.json()
-        setRecentNovels(novelsData.novels || [])
-      }
-    } catch (error) {
-      console.error('加载数据失败:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  if (loading) {
-    return (
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="text-gray-600">正在加载...</div>
-      </div>
-    )
-  }
-
   return (
     <div>
       {/* 欢迎区域 */}
@@ -95,7 +41,7 @@ export default function HomePage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         <div className="bg-blue-50 border border-blue-100 rounded-xl p-6">
           <div className="text-3xl font-bold text-blue-700 mb-2">
-            {stats.totalNovels}
+            0
           </div>
           <div className="text-lg font-medium text-blue-800">
             已发布小说
@@ -131,7 +77,7 @@ export default function HomePage() {
 
         <div className="bg-purple-50 border border-purple-100 rounded-xl p-6">
           <div className="text-3xl font-bold text-purple-700 mb-2">
-            {stats.totalUsers}
+            0
           </div>
           <div className="text-lg font-medium text-purple-800">
             注册作者
@@ -140,60 +86,6 @@ export default function HomePage() {
             正在创作精彩故事的小作者
           </div>
         </div>
-      </div>
-
-      {/* 最新作品 */}
-      <div className="mb-12">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">
-          最新作品
-        </h2>
-        
-        {recentNovels.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {recentNovels.map((novel) => (
-              <div key={novel.id} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2 truncate">
-                  {novel.title}
-                </h3>
-                <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                  {novel.description || '暂无描述'}
-                </p>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-500">
-                    作者：{novel.author_username}
-                  </span>
-                  <Link
-                    href={`/novels/${novel.id}`}
-                    className="text-sm text-blue-600 hover:text-blue-800 font-medium"
-                  >
-                    阅读 →
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-12 bg-gray-50 rounded-xl">
-            <div className="text-gray-500 mb-4">暂无作品</div>
-            <Link
-              href="/novels/new"
-              className="text-blue-600 hover:text-blue-800 font-medium"
-            >
-              成为第一个创作者 →
-            </Link>
-          </div>
-        )}
-        
-        {recentNovels.length > 0 && (
-          <div className="text-center mt-8">
-            <Link
-              href="/novels"
-              className="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors"
-            >
-              浏览所有作品
-            </Link>
-          </div>
-        )}
       </div>
 
       {/* 平台特色 */}

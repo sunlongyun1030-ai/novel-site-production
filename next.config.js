@@ -21,16 +21,6 @@ const nextConfig = {
     unoptimized: true,
   },
   
-  // 重写规则 - 确保路由正确
-  async rewrites() {
-    return [
-      {
-        source: '/:path*',
-        destination: '/',
-      },
-    ];
-  },
-  
   // Webpack配置 - 明确的路径别名
   webpack: (config, { isServer }) => {
     // 添加路径别名（服务器端和客户端都需要）
