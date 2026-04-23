@@ -16,15 +16,18 @@ const nextConfig = {
     unoptimized: true,
   },
   
-  // Webpack配置 - 添加路径别名
+  // Webpack配置 - 明确的路径别名
   webpack: (config, { isServer }) => {
-    if (!isServer) {
-      // 客户端构建时添加别名
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        '@': __dirname,
-      }
+    // 添加路径别名（服务器端和客户端都需要）
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': __dirname,
+      '@/app': __dirname + '/app',
+      '@/components': __dirname + '/components',
+      '@/hooks': __dirname + '/hooks',
+      '@/lib': __dirname + '/lib',
     }
+    
     return config
   },
 }
