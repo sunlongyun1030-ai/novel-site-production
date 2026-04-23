@@ -1,24 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    serverComponentsExternalPackages: ['wrangler'],
-  },
-  // Cloudflare Pages适配配置
-  output: 'standalone',
-  // 启用API路由
-  rewrites: async () => {
-    return [
-      {
-        source: '/api/:path*',
-        destination: '/api/:path*',
-      },
-    ]
-  },
-  // 优化Cloudflare Pages部署
-  compress: true,
-  generateEtags: true,
-  poweredByHeader: false,
+  // 基本配置
   reactStrictMode: true,
+  swcMinify: true,
+  
+  // 暂时移除standalone模式
+  // output: 'standalone',
+  
+  // 暂时移除重写规则
+  // rewrites: async () => {
+  //   return [
+  //     {
+  //       source: '/api/:path*',
+  //       destination: '/api/:path*',
+  //     },
+  //   ]
+  // },
 }
 
 module.exports = nextConfig
