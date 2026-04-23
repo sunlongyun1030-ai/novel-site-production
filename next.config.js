@@ -3,9 +3,6 @@ const nextConfig = {
   // 基本配置
   reactStrictMode: false,
   
-  // 输出配置 - 确保正确的构建输出
-  output: 'standalone',
-  
   // 完全禁用TypeScript - 使用experimental配置
   experimental: {
     disablePostcssPresetEnv: true,
