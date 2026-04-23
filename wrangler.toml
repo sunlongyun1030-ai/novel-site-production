@@ -11,6 +11,7 @@ compatibility_flags = ["nodejs_compat"]
 [vars]
 NODE_ENV = "production"
 NODE_VERSION = "20"
+CI = "true"
 
 [[d1_databases]]
 binding = "DB"
