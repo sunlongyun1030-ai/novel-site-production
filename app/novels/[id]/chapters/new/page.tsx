@@ -109,7 +109,6 @@ export default function AddChapterPage() {
       } else {
         setError('添加章节失败')
       }
-      }
     } catch (err) {
       setError(err instanceof Error ? err.message : '添加失败')
     } finally {

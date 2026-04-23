@@ -21,6 +21,13 @@ export default function CreateNovelPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // 检查用户是否登录
+    if (!user) {
+      setError('请先登录')
+      return
+    }
+    
     setError('')
     setSuccess('')
     setLoading(true)

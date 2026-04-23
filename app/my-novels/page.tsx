@@ -27,6 +27,8 @@ export default function MyNovelsPage() {
   }, [user])
 
   const loadMyNovels = async () => {
+    if (!user) return
+    
     try {
       // 调用获取用户作品的API
       const response = await fetch(`/api/my-novels?author_id=${user.id}`)

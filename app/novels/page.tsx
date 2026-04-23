@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, Suspense } from 'react'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/use-auth'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -22,7 +22,7 @@ interface Pagination {
   has_prev: boolean
 }
 
-export default function NovelsPage() {
+function NovelsContent() {
   const { user } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -338,5 +338,13 @@ export default function NovelsPage() {
         </>
       )}
     </div>
+  )
+}
+
+export default function NovelsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-[60vh] flex items-center justify-center">加载中...</div>}>
+      <NovelsContent />
+    </Suspense>
   )
 }
