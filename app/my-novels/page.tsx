@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useAuth } from '@/app/auth-context'
+import { useAuth } from '@/hooks/use-auth'
 
 interface Novel {
   id: string

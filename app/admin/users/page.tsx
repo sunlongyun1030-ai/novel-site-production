@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useAuth } from '@/app/auth-context'
+import { useAuth } from '@/hooks/use-auth'
 
 interface User {
   id: string
