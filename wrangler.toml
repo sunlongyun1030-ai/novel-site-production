@@ -1,0 +1,16 @@
+name = "novel-site-d1"
+compatibility_date = "2024-04-22"
+compatibility_flags = ["nodejs_compat"]
+main = "./api/_worker.js"
+pages_build_output_dir = "./out"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "novel-site-db"
+database_id = "be4e1044-b2b0-47ef-b2aa-7aca4687a717"
+
+[vars]
+NODE_ENV = "production"
+
+[env.production]
+vars = { NODE_ENV = "production" }

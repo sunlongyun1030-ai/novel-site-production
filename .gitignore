@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+.next/
+
+# Production
+build/
+dist/
+out/
+
+# Environment variables
+.env*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cloudflare
+.wrangler/
+.dev.vars
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test files
+*.test.js
+*.spec.js
+
+# Temporary files
+*.tmp
+*.temp
+
+# Backup files
+*.bak

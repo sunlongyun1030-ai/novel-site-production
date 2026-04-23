@@ -1,0 +1,25 @@
+name = "novel-site-d1"
+production_branch = "main"
+compatibility_date = "2025-01-01"
+
+[build]
+command = "npm run build"
+output_directory = ".next"
+
+[build.upload]
+format = "directory"
+
+[env]
+NODE_VERSION = "18"
+
+[[env.production]]
+NODE_ENV = "production"
+
+[[env.preview]]  
+NODE_ENV = "development"
+
+# D1数据库绑定
+[[d1_databases]]
+binding = "DB"
+database_name = "novel-site-db"
+database_id = "be4e1044-b2b0-47ef-b2aa-7aca4687a717"
