@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 绝对最小配置 - Cloudflare Pages专用
+  // 绝对最小配置
   reactStrictMode: false,
   
   // 禁用所有检查
@@ -18,6 +18,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  
+  // 禁用所有实验性功能
+  experimental: {},
 }
 
 module.exports = nextConfig
